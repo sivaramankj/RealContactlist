@@ -1,0 +1,40 @@
+﻿@model Data.UserAccount.LoginModel
+@{
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<div class="main">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger",style = "width: 350px;float:right;" })
+    @using (Html.BeginForm("Login", "Account", new {ReturnUrl = ViewBag.ReturnUrl, @class = "form",style="width:500px;"}))
+    {
+        @Html.AntiForgeryToken()
+        <h2>Contact List Login</h2>
+        <div class="form-contol-group">
+            @Html.LabelFor(model => model.UserName)
+            <div style="margin-bottom: 12px">
+                @Html.EditorFor(model => model.UserName)
+                @Html.ValidationMessageFor(model => model.UserName, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-contol-group">
+            @Html.LabelFor(model => model.Password)
+            <div style="margin-bottom: 12px">
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-contol-group">
+            @Html.LabelFor(model => model.RememberMe)
+            <div class="checkbox" style="margin-bottom: 12px">
+                @Html.EditorFor(model => model.RememberMe)
+                @Html.ValidationMessageFor(model => model.RememberMe, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div style="float: right;">
+            <input type="submit" value="Login" class="btn btn-primary"/>
+            <ul class="list-group" style="display: inline-block;">
+                <li class="list-group-item">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            </ul>
+        </div>
+    }
+</div>
